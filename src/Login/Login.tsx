@@ -1,35 +1,11 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import {makeStyles, createStyles, Theme} from '@material-ui/core/styles';
+import InputComponent from './InputComponent'
+import {LoginStyle} from './LoginStyle'
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            flexGrow: 1,
-            overflow: 'hidden',
-            padding: theme.spacing(0, 3),
-            margin: 200,
-            '& .MuiTextField-root': {
-                margin: theme.spacing(1),
-                width: '25ch',
-            },
-            '& > *': {
-                margin: theme.spacing(1),
-            },
-        },
-        paper: {
-            maxWidth: 300,
-            margin: `${theme.spacing(1)}px auto`,
-            padding: theme.spacing(2),
-        },
-        button: {
-            marginLeft: `${theme.spacing(2)}px auto`,
-        }
-    }),
-);
+const useStyles = LoginStyle;
 
 interface IProps {
     classes: any;
@@ -38,39 +14,29 @@ interface IProps {
 }
 
 interface IState {
-    validationData: {
-        name: string,
-        password: string
-    };
+
+    name: string,
+    password: string
+
 }
 
 class LoginComponent extends React.Component<IProps, IState> {
     public static defaultProps: Partial<IProps> = {};
 
     public state: IState = {
-        validationData: {
-            name: "",
-            password: ""
-        }
+        name: "",
+        password: ""
     };
-    public increase = () => {
-        const data: object = this.state.validationData;
+    loginClick = () => {
+        //TODO: Route to homepage
     };
 
     handleLoginInput = (event: React.ChangeEvent<{ value: string }>) => {
-        const result = {
-            name: event.target.value,
-            password: this.state.validationData.password
-        }
-        this.setState({validationData: result});
+        this.setState({name: event.target.value});
     };
 
     handlePasswordInput = (event: React.ChangeEvent<{ value: string }>) => {
-        const result = {
-            name:  this.state.validationData.name,
-            password:event.target.value
-        }
-        this.setState({validationData: result});
+        this.setState({password: event.target.value});
     };
 
     public render() {
@@ -79,35 +45,12 @@ class LoginComponent extends React.Component<IProps, IState> {
         return (
             <form className={this.props.classes} noValidate autoComplete="off">
                 <Paper className={this.props.classes.paper}>
-                    <Grid container wrap="nowrap" spacing={2}>
-                        <Grid item xs zeroMinWidth>
-                            <TextField
-                                required
-                                id="outlined-required"
-                                label="Login"
-                                defaultValue=""
-                                variant="outlined"
-                                onChange={this.handleLoginInput}
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid container wrap="nowrap" spacing={2}>
-                        <Grid item xs>
-                            <TextField
-                                required
-                                id="outlined-password-input"
-                                label="Password"
-                                type="password"
-                                autoComplete="current-password"
-                                variant="outlined"
-                                onChange={this.handlePasswordInput}
-                            />
-                        </Grid>
-                    </Grid>
-
+                    <InputComponent onChange={this.handleLoginInput} label={"Login"} type={"text"}/>
+                    <InputComponent onChange={this.handlePasswordInput} label={"Password"}
+                                    type={"password"}/>
                     <Grid container wrap="nowrap">
                         <Grid item xs>
-                            <Button onClick={this.increase} variant="contained" color="primary"
+                            <Button onClick={this.loginClick} variant="contained" color="primary"
                                     disableElevation>
                                 Login
                             </Button>
