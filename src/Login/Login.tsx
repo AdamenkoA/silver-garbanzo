@@ -67,7 +67,7 @@ class LoginComponent extends React.Component<IProps, IState> {
                             <Button className={this.props.classes.login_button} onClick={this.loginClick}
                                     variant="contained" color="primary"
                                     disableElevation>
-                                Sing in
+                                Sign in
                             </Button>
                         </Grid>
                     </Grid>
