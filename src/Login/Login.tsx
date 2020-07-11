@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import InputComponent from './InputComponent'
 import {LoginStyle} from './LoginStyle'
+import history from "../Server/history";
 
 const useStyles = LoginStyle;
 
@@ -20,6 +21,9 @@ interface IState {
 
 }
 
+/**
+ * Login form
+ */
 class LoginComponent extends React.Component<IProps, IState> {
     public static defaultProps: Partial<IProps> = {};
 
@@ -27,8 +31,18 @@ class LoginComponent extends React.Component<IProps, IState> {
         name: "",
         password: ""
     };
+
+    /**
+     *
+     */
     loginClick = () => {
-        //TODO: Route to homepage
+        if (this.state.name === "" || this.state.password === "") {
+            window.alert("Login or password is empty");
+        } else if (this.state.name === "admin" && this.state.password === "12345") {
+            history.push('/Home');
+        } else {
+            window.alert("Wrong login or password");
+        }
     };
 
     handleLoginInput = (event: React.ChangeEvent<{ value: string }>) => {
@@ -50,9 +64,10 @@ class LoginComponent extends React.Component<IProps, IState> {
                                     type={"password"}/>
                     <Grid container wrap="nowrap">
                         <Grid item xs>
-                            <Button onClick={this.loginClick} variant="contained" color="primary"
+                            <Button className={this.props.classes.login_button} onClick={this.loginClick}
+                                    variant="contained" color="primary"
                                     disableElevation>
-                                Login
+                                Sing in
                             </Button>
                         </Grid>
                     </Grid>

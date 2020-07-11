@@ -20,8 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: `${theme.spacing(1)}px auto`,
             padding: theme.spacing(2),
         },
-        button: {
-            marginLeft: `${theme.spacing(2)}px auto`,
+        login_button:{
+            maxWidth: 300,
+            margin: `${theme.spacing(1)}px auto`,
         }
     })
 );
