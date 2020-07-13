@@ -1,6 +1,6 @@
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme: Theme) =>
+export const LoginStyle = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             flexGrow: 1,
@@ -20,13 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: `${theme.spacing(1)}px auto`,
             padding: theme.spacing(2),
         },
-        login_button:{
+        button:{
             maxWidth: 300,
             margin: `${theme.spacing(1)}px auto`,
+            padding: theme.spacing(1)
         }
     })
 );
-
-export function LoginStyle() {
-    return useStyles();
-}
