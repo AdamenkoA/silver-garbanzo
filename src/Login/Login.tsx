@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import InputComponent from './InputComponent'
 import {LoginStyle} from './LoginStyle'
 import history from "../Server/history";
+import {ButtonGroup} from "@material-ui/core";
 
 const useStyles = LoginStyle;
 
@@ -16,8 +17,9 @@ interface IProps {
 
 interface IState {
 
-    name: string,
-    password: string
+    Login: string,
+    Password: string,
+    ShowAdditionalField: boolean
 
 }
 
@@ -28,30 +30,34 @@ class LoginComponent extends React.Component<IProps, IState> {
     public static defaultProps: Partial<IProps> = {};
 
     public state: IState = {
-        name: "",
-        password: ""
+        Login: "",
+        Password: "",
+        ShowAdditionalField: false
     };
 
     /**
      *
      */
-    loginClick = () => {
-        if (this.state.name === "" || this.state.password === "") {
+    signInClick = () => {
+        if (this.state.Login === "" || this.state.Password === "") {
             window.alert("Login or password is empty");
-        } else if (this.state.name === "admin" && this.state.password === "12345") {
+        } else if (this.state.Login === "admin" && this.state.Password === "12345") {
             history.push('/Home');
         } else {
             window.alert("Wrong login or password");
         }
     };
 
-    handleLoginInput = (event: React.ChangeEvent<{ value: string }>) => {
-        this.setState({name: event.target.value});
+    signUpClick = () => {
+        this.setState({ShowAdditionalField: !this.state.ShowAdditionalField});
     };
 
-    handlePasswordInput = (event: React.ChangeEvent<{ value: string }>) => {
-        this.setState({password: event.target.value});
+    onChangeInput = (event: React.ChangeEvent<{ name: string, value: string }>) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({[name]: value} as any);
     };
+
 
     public render() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -59,17 +65,32 @@ class LoginComponent extends React.Component<IProps, IState> {
         return (
             <form className={this.props.classes} noValidate autoComplete="off">
                 <Paper className={this.props.classes.paper}>
-                    <InputComponent onChange={this.handleLoginInput} label={"Login"} type={"text"}/>
-                    <InputComponent onChange={this.handlePasswordInput} label={"Password"}
+                    <InputComponent onChange={this.onChangeInput} label={"Login"} type={"text"}/>
+                    <InputComponent onChange={this.onChangeInput} label={"Password"}
                                     type={"password"}/>
-                    <Grid container wrap="nowrap">
-                        <Grid item xs>
-                            <Button className={this.props.classes.login_button} onClick={this.loginClick}
-                                    variant="contained" color="primary"
+                    {this.state.ShowAdditionalField && <InputComponent onChange={() => {
+                    }} label={"Email"} type={"text"}/>}
+                    <Grid container justify="center" spacing={2}>
+
+                        <ButtonGroup disableElevation variant="contained" color="primary">
+                            <Button className={this.props.classes.button}
+                                    size="medium"
+                                    onClick={this.signInClick}
+                                    variant="contained"
+                                    color="inherit"
                                     disableElevation>
                                 Sign in
                             </Button>
-                        </Grid>
+                            <Button className={this.props.classes.button}
+                                    size="small"
+                                    onClick={this.signUpClick}
+                                    variant="outlined"
+                                    color="inherit"
+                                    disableElevation>
+                                Sign up
+                            </Button>
+                        </ButtonGroup>
+
                     </Grid>
                 </Paper>
             </form>

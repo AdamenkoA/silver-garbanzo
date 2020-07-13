@@ -15,6 +15,7 @@ export default function inputComponent({onChange, label, type, ...props}: { onCh
                 id={elementId(label)}
                 label={label}
                 type={type}
+                name={label}
                 defaultValue=""
                 variant="outlined"
                 onChange={onChange}
