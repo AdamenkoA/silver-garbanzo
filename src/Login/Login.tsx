@@ -49,6 +49,9 @@ class LoginComponent extends React.Component<IProps, IState> {
     };
 
     signUpClick = () => {
+        var b :any;
+        var a = b.val;
+        debugger;
         this.setState({ShowAdditionalField: !this.state.ShowAdditionalField});
     };
 
