@@ -7,14 +7,10 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-
             </header>
-            <body>
             <ErrorBoundaries>
                 <Pages/>
             </ErrorBoundaries>
-
-            </body>
         </div>
     );
 }

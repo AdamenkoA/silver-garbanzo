@@ -11,16 +11,13 @@ const useStyles = LoginStyle;
 
 interface IProps {
     classes: any;
-
     onChange(name: string, value: string): void;
 }
 
 interface IState {
-
     Login: string,
     Password: string,
     ShowAdditionalField: boolean
-
 }
 
 /**
@@ -71,7 +68,6 @@ class LoginComponent extends React.Component<IProps, IState> {
                     {this.state.ShowAdditionalField && <InputComponent onChange={() => {
                     }} label={"Email"} type={"text"}/>}
                     <Grid container justify="center" spacing={2}>
-
                         <ButtonGroup disableElevation variant="contained" color="primary">
                             <Button className={this.props.classes.button}
                                     size="medium"
@@ -90,7 +86,6 @@ class LoginComponent extends React.Component<IProps, IState> {
                                 Sign up
                             </Button>
                         </ButtonGroup>
-
                     </Grid>
                 </Paper>
             </form>

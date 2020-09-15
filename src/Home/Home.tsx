@@ -1,56 +1,113 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import DeveloperBoard from '@material-ui/icons/DeveloperBoard';
+import AssignmentTurnedIn from '@material-ui/icons/AssignmentTurnedIn';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import {HomeStyle} from './HomeStyle'
+import {useTheme} from '@material-ui/core/styles';
+import {Lorem, WelcomeText} from "./TemplateText";
+import SpacingGrid from "./Board/Board";
 
-interface IListItems {
-    name: string,
-    key: number
+const useStyles = HomeStyle;
+
+interface IState {
+    Caption: string,
+    ShowBoard: boolean
 }
 
-interface IListProps {
-
+interface IProps {
+    classes: any;
+    theme: any;
+    window?: () => Window;
 }
 
-interface IListState {
-    items: Array<IListItems>;
-}
-
-/**
- * List of item in home page
- */
-export default class Home extends React.Component<IListProps, IListState> {
-    constructor(props: IListProps) {
-        super(props);
-        this.state = {
-            items: [
-                {
-                    name: 'phone',
-                    key: 1
-                },
-                {
-                    name: 'cup',
-                    key: 2
-                },
-                {
-                    name: 'book',
-                    key: 3
-                },
-                {
-                    name: 'keyboard',
-                    key: 4
-                }
-            ]
-        }
+const leftPanel = [
+    {
+        name: 'Board',
+        key: 'id_Board',
+        board: true,
+        icon: <DeveloperBoard/>
+    },
+    {
+        name: 'Sprint',
+        key: 'id_Sprint',
+        board: false,
+        icon: <AssignmentTurnedIn/>
     }
+];
 
-    render() {
+class ResponsiveDrawer extends React.Component<IProps, IState> {
+    public static defaultProps: Partial<IProps> = {};
+
+    public state: IState = {
+        Caption: WelcomeText,
+        ShowBoard: true
+    };
+    leftPanelClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, name: any, board: boolean) => {
+        this.setState({Caption: name, ShowBoard: board})
+    };
+    drawer = (
+        <div>
+            <div className={this.props.classes.toolbar}/>
+            <Divider/>
+            <List>
+                {leftPanel.map((item) => (
+                    <ListItem button={true} key={item.key} onClick={(event) =>
+                        this.leftPanelClick(event, item.name, item.board)}>
+                        <ListItemIcon>{item.icon}</ListItemIcon>
+                        <ListItemText primary={item.name}/>
+                    </ListItem>
+                ))}
+            </List>
+            <Divider/>
+        </div>
+    );
+
+    public render() {
         return (
-            <ul className="list-group">
-                {this.state.items.map(item => {
-                    return <li className="list-group-item" key={item.key}>
-                        <Link to={`/${item.name}`}>{item.name}</Link>
-                    </li>
-                })}
-            </ul>
+            <div className={this.props.classes.root}>
+                <CssBaseline/>
+                <AppBar position="fixed" className={this.props.classes.appBar}>
+                    <Toolbar>
+                        <Typography variant="h6" noWrap>
+                            {this.state.Caption}
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    className={this.props.classes.drawer}
+                    variant="permanent"
+                    classes={{
+                        paper: this.props.classes.drawerPaper,
+                    }}
+                    anchor="left"
+                >
+                    <div className={this.props.classes.toolbar}/>
+                    {this.drawer}
+                </Drawer>
+                <main className={this.props.classes.content}>
+                    <div className={this.props.classes.toolbar}/>
+                    {this.state.ShowBoard ? <SpacingGrid/> : <Typography paragraph>
+                        {Lorem}
+                    </Typography>}
+                </main>
+            </div>
         );
     }
+}
+
+export default function Home() {
+    const classes = useStyles();
+    const theme = useTheme();
+    return (
+        <ResponsiveDrawer classes={classes} theme={theme}/>
+    );
 }
