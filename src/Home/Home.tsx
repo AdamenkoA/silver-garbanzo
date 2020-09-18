@@ -15,6 +15,7 @@ import {HomeStyle} from './HomeStyle'
 import {useTheme} from '@material-ui/core/styles';
 import {Lorem, WelcomeText} from "./TemplateText";
 import SpacingGrid from "./Board/Board";
+import EnhancedTable from "./Board/Table/BoardTable";
 
 const useStyles = HomeStyle;
 
@@ -37,7 +38,7 @@ const leftPanel = [
         icon: <DeveloperBoard/>
     },
     {
-        name: 'Sprint',
+        name: 'Table',
         key: 'id_Sprint',
         board: false,
         icon: <AssignmentTurnedIn/>
@@ -95,9 +96,7 @@ class ResponsiveDrawer extends React.Component<IProps, IState> {
                 </Drawer>
                 <main className={this.props.classes.content}>
                     <div className={this.props.classes.toolbar}/>
-                    {this.state.ShowBoard ? <SpacingGrid/> : <Typography paragraph>
-                        {Lorem}
-                    </Typography>}
+                    {this.state.ShowBoard ? <SpacingGrid/> :<EnhancedTable/>}
                 </main>
             </div>
         );

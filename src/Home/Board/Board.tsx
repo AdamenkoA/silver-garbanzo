@@ -38,7 +38,7 @@ export default function SpacingGrid() {
 
         <div className={classes.root}>
             <Grid container justify="center" spacing={spacing} direction="row" alignItems="stretch">
-                {[0, 1, 2, 3, 4].map((value) => (
+                {[0, 1, 2, 3].map((value) => (
                     <Grid key={value} item>
                         <Paper className={classes.paper}>
                             <SimpleCard/>
