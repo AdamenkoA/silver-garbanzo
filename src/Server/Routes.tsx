@@ -3,6 +3,8 @@ import {Switch, Route, Router} from "react-router-dom";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
 import history from "./history";
+import Button from "@material-ui/core/Button";
+import {Link} from "@material-ui/core";
 
 interface IListPages {
     path: string,
@@ -48,6 +50,17 @@ export default class Pages extends React.Component<IListProps, IListState> {
                     {this.state.pages.map(route => {
                         return <Route key={route.key} exact path={route.path} component={route.component}/>
                     })}
+                    <Route component={() => <div> Error 404. The requested resource is not found. Return on
+                        <Link
+                            component="button"
+                            variant="body2"
+                            onClick={() => {
+                                history.push('/Home');
+                            }}
+                        >
+                            Home Page
+                        </Link>
+                    </div>}/>
                 </Switch>
             </Router>
         );

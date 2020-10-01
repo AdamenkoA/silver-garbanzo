@@ -16,6 +16,7 @@ import {useTheme} from '@material-ui/core/styles';
 import {Lorem, WelcomeText} from "./TemplateText";
 import SpacingGrid from "./Board/Board";
 import EnhancedTable from "./Board/Table/BoardTable";
+import Tbs from "../Components/Tbs";
 
 const useStyles = HomeStyle;
 
@@ -77,11 +78,7 @@ class ResponsiveDrawer extends React.Component<IProps, IState> {
             <div className={this.props.classes.root}>
                 <CssBaseline/>
                 <AppBar position="fixed" className={this.props.classes.appBar}>
-                    <Toolbar>
-                        <Typography variant="h6" noWrap>
-                            {this.state.Caption}
-                        </Typography>
-                    </Toolbar>
+                    <Tbs/>
                 </AppBar>
                 <Drawer
                     className={this.props.classes.drawer}

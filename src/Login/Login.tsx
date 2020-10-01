@@ -6,11 +6,13 @@ import InputComponent from './InputComponent'
 import {LoginStyle} from './LoginStyle'
 import history from "../Server/history";
 import {ButtonGroup} from "@material-ui/core";
+import Tbs from "../Components/Tbs";
 
 const useStyles = LoginStyle;
 
 interface IProps {
     classes: any;
+
     onChange(name: string, value: string): void;
 }
 
@@ -20,9 +22,6 @@ interface IState {
     ShowAdditionalField: boolean
 }
 
-/**
- * Login form
- */
 class LoginComponent extends React.Component<IProps, IState> {
     public static defaultProps: Partial<IProps> = {};
 
@@ -31,10 +30,6 @@ class LoginComponent extends React.Component<IProps, IState> {
         Password: "",
         ShowAdditionalField: false
     };
-
-    /**
-     *
-     */
     signInClick = () => {
         if (this.state.Login === "" || this.state.Password === "") {
             window.alert("Login or password is empty");
@@ -57,10 +52,9 @@ class LoginComponent extends React.Component<IProps, IState> {
 
 
     public render() {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const {onChange, ...htmlProps} = this.props;
         return (
             <form className={this.props.classes} noValidate autoComplete="off">
+                <Tbs/>
                 <Paper className={this.props.classes.paper}>
                     <InputComponent onChange={this.onChangeInput} label={"Login"} type={"text"}/>
                     <InputComponent onChange={this.onChangeInput} label={"Password"}

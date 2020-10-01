@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Pages from "./Server/Routes";
 import ErrorBoundaries from './Error/ErrorBoundaries';
-
 function App() {
     return (
         <div className="App">
@@ -14,5 +13,4 @@ function App() {
         </div>
     );
 }
-
 export default App;
