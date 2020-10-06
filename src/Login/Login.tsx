@@ -50,11 +50,14 @@ class LoginComponent extends React.Component<IProps, IState> {
         this.setState({[name]: value} as any);
     };
 
+    caption = () => {
+        return "Login";
+    }
 
     public render() {
         return (
             <form className={this.props.classes} noValidate autoComplete="off">
-                <Tbs/>
+                <Tbs caption={this.caption()}/>
                 <Paper className={this.props.classes.paper}>
                     <InputComponent onChange={this.onChangeInput} label={"Login"} type={"text"}/>
                     <InputComponent onChange={this.onChangeInput} label={"Password"}

@@ -72,13 +72,16 @@ class ResponsiveDrawer extends React.Component<IProps, IState> {
             <Divider/>
         </div>
     );
+    caption = () => {
+        return "Logout";
+    }
 
     public render() {
         return (
             <div className={this.props.classes.root}>
                 <CssBaseline/>
                 <AppBar position="fixed" className={this.props.classes.appBar}>
-                    <Tbs/>
+                    <Tbs caption={this.caption()}/>
                 </AppBar>
                 <Drawer
                     className={this.props.classes.drawer}
@@ -93,7 +96,7 @@ class ResponsiveDrawer extends React.Component<IProps, IState> {
                 </Drawer>
                 <main className={this.props.classes.content}>
                     <div className={this.props.classes.toolbar}/>
-                    {this.state.ShowBoard ? <SpacingGrid/> :<EnhancedTable/>}
+                    {this.state.ShowBoard ? <SpacingGrid/> : <EnhancedTable/>}
                 </main>
             </div>
         );

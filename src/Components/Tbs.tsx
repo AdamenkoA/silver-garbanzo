@@ -6,6 +6,8 @@ import {WelcomeText} from "../Home/TemplateText";
 import {TbsStyle} from "./TbsStyle";
 import {Toolbar} from "@material-ui/core";
 import history from "../Server/history";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = TbsStyle
 
@@ -16,7 +18,7 @@ interface IState {
 interface IProps {
     classes: any;
     window?: () => Window;
-    isLogin: boolean;
+    buttonCaption: string;
 }
 
 class UpperTbs extends React.Component<IProps, IState> {
@@ -29,6 +31,7 @@ class UpperTbs extends React.Component<IProps, IState> {
         history.push('/Login');
     };
 
+
     public render() {
         return (
             <div className={this.props.classes}>
@@ -38,7 +41,7 @@ class UpperTbs extends React.Component<IProps, IState> {
                             <Typography variant="h6" className={this.props.classes.title}>
                                 {this.state.Caption}
                             </Typography>
-                            <Button color="inherit" onClick={this.loginClick}>{this.props.isLogin}?Login:Logout</Button>
+                            <Button color="inherit" onClick={this.loginClick}>{this.props.buttonCaption}</Button>
                         </Toolbar>
                     </AppBar>
                 </div>
@@ -47,9 +50,10 @@ class UpperTbs extends React.Component<IProps, IState> {
     }
 }
 
-export default function Tbs() {
+export default function Tbs({caption, ...props}: { caption: string, prop?: any }) {
+    const buttonCaption = caption;
     const classes = useStyles();
     return (
-        <UpperTbs classes={classes}/>
+        <UpperTbs classes={classes} buttonCaption={buttonCaption}/>
     );
 }
